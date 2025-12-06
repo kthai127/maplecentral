@@ -54,3 +54,16 @@ def tap_once(current_star: int, safeguard: bool):
         return current_star, "FAIL"
     else:
         return 0, "BOOM"
+    
+def get_rates(current_star: int, safeguard: bool):
+    """
+    Returns the actual rates (success, fail, boom) for UI display,
+    including safeguard adjustments.
+    """
+    success, fail, boom = STARFORCE_TABLE[current_star]
+
+    if safeguard and 15 <= current_star <= 17:
+        fail += boom
+        boom = 0
+
+    return success, fail, boom
